@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import classNames from 'classnames'
+import { DropZone } from './components/DropZone'
+import Box from '@mui/material/Box';
 
-function App() {
-  const [count, setCount] = useState(0)
+
+export const App = React.memo(() => {
+  // Create "active" state for dropzone:
+  const [isDropActive, setIsDropActive] = React.useState(false)
+  // Create state for dropped files:
+  const [files, setFiles] = React.useState<File[]>([])
+
+  // Create handler for dropzone's onDragStateChange:
+  const onDragStateChange = React.useCallback((dragActive: boolean) => {
+    setIsDropActive(dragActive)
+  }, [])
+
+  // Create handler for dropzone's onFilesDrop:
+  const onFilesDrop = React.useCallback((files: File[]) => {
+    setFiles(files)
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
+      <div className={classNames('dropZoneWrapper', {'dropZoneActive': isDropActive, })}>
+        <DropZone onDragStateChange={onDragStateChange} onFilesDrop={onFilesDrop}>
+          <h2>Drop your files here</h2>
+            {files.length === 0 ? (
+              <h3>No files to upload</h3>
+            ) : (
+              <h3>Files to upload: {files.length}</h3>
+            )}
+        </DropZone>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </Box>
   )
-}
+})
 
+App.displayName = 'App'
 export default App

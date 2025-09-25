@@ -1,4 +1,5 @@
 import { Box, Typography, Card, CardContent} from '@mui/material'
+import { green, amber, orange, grey } from '@mui/material/colors'
 import React from 'react'
 
 
@@ -18,13 +19,13 @@ export const ResultBox = React.memo(
         <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
           Ergebnisse
         </Typography>
-        <Typography variant="h5" component="div" sx={{ color: 'text.success', mb: 1.5 }}>
+        <Typography variant="h5" component="div" sx={{ color: green[600], mb: 1.5 }}>
           Bester Teiler: {firstValue}
         </Typography>
-        <Typography variant="h6" component="div" sx={{ color: 'text.primary', mb: 1.5 }}>
+        <Typography variant="h6" component="div" sx={{ color: grey[800], mb: 1.5 }}>
           Teiler: {secondValue}
         </Typography>
-        <Typography variant="h6" component="div" sx={{ color: 'text.primary', mb: 1.5 }}>
+        <Typography variant="h6" component="div" sx={{ color: grey[800], mb: 1.5 }}>
           Teiler: {thirdValue}
         </Typography>
       </CardContent>

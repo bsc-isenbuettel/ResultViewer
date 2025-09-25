@@ -52,7 +52,11 @@ export const App = React.memo(() => {
           </DropZone>
         </div>
       </Box>
-      <ResultBox value={(json?.ParameterResults[0].Teilers[0] * 100000).toFixed(3) || "N/A"} />
+      <ResultBox 
+        firstValue={(json?.ParameterResults[0].Teilers[0] * 100000).toFixed(3) || "N/A"} 
+        secondValue={(json?.ParameterResults[0].Teilers[1] * 100000).toFixed(3) || "N/A"} 
+        thirdValue={(json?.ParameterResults[0].Teilers[2] * 100000).toFixed(3) || "N/A"} 
+        />
     </Container>
   )
 })

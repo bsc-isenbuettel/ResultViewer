@@ -5,6 +5,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { ResultBox } from './components/ResultBox';
 import Target from './components/Target';
+import files from './assets/raw';
+
 
 
 export const App = React.memo(() => {

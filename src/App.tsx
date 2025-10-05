@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 export const App = React.memo(() => {
   // Create state for entire data.
   const [data, setData] = React.useState<any[]>([])
+  const [fetchError, setFetchError] = React.useState<string | null>(null);
 
   function extractNestedArrays(obj: any): any[] {
     const arrays: any[] = [];
@@ -61,6 +62,9 @@ export const App = React.memo(() => {
       .then((data) => {        
           setData(extractNestedArrays(data)); // Extract and set only the arrays
           console.log(data);
+      }).catch((error) => {
+          setFetchError("Failed to fetch data from server.");
+          console.error("Error fetching data:", error);
       });
   }, []);
 
@@ -109,7 +113,9 @@ export const App = React.memo(() => {
           </Toolbar>
         </AppBar>
       </Box>
-        {data.map((item) => {
+        {
+        fetchError ? (<Typography color="error" variant="h6">Error: ResultViewerServer is not running</Typography>) : 
+        data.map((item) => {
           const lowest = getLowestSplitInfo(item);
           return (
           <Box marginBottom={5}>
@@ -124,8 +130,9 @@ export const App = React.memo(() => {
             <ResultsTable rows={item} />
           </React.Fragment>
           </Box>
-        );
-      })}
+          );
+        })
+      }
     </Container>
   ); 
 })

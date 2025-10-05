@@ -31,66 +31,7 @@ function createData (
   };
 }
 
-// Function to create each row.
-function Row(props: { row: ReturnType<typeof createData> }) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
-
-  return (
-    <React.Fragment>
-      {/* Main row */}
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell component="th" scope="row">{row.id}</TableCell>
-        <TableCell>{row.firstName}</TableCell>
-        <TableCell>{row.lastName}</TableCell>
-        <TableCell align="right">1. Teiler</TableCell>
-        <TableCell align="right">2. Teiler</TableCell>
-        <TableCell align="right">3. Teiler</TableCell>
-      </TableRow>
-
-      {/* Expandable row */}
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography variant="h6" gutterBottom component="div">
-                {row.date}
-              </Typography>
-              <Table size="small" aria-label="teilers">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="right">1. Teiler</TableCell>
-                    <TableCell align="right">2. Teiler</TableCell>
-                    <TableCell align="right">3. Teiler</TableCell>
-                  </TableRow>
-                </TableHead>
-
-                <TableBody>
-                    <TableRow key={row.date}>
-                      <TableCell align="right">{(row.splits[0] * 100000).toFixed(3)}</TableCell>
-                      <TableCell align="right">{(row.splits[1] * 100000).toFixed(3)}</TableCell>
-                      <TableCell align="right">{(row.splits[2] * 100000).toFixed(3)}</TableCell>
-                    </TableRow>
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
-}
-
-// 1. Define the prop type
+// Define the prop type
 type ResultsTableProps = {
   rows: ReturnType<typeof createData>[];
 };

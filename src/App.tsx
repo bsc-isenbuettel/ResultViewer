@@ -68,23 +68,6 @@ export const App = React.memo(() => {
       });
   }, []);
 
-  // Function to structure data for table.
-  function createData (
-    id: string,
-    firstName: string,
-    lastName: string,
-    date: string,
-    splits: number[]
-  ) {
-    return {
-      id,
-      firstName,
-      lastName,
-      date,
-      splits: [0.0, 0.0, 0.0]
-    };
-  }
-
   // Function to get the date from YYYYMMDD format to a readable format.
   function getDate(sDate: string): string {
       const year = sDate.slice(0, 4);

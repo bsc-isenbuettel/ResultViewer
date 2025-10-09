@@ -60,7 +60,7 @@ export const App = React.memo(() => {
       fetch("http://localhost:1337/api/groupByDate")
       .then((res) => res.json())
       .then((data) => {        
-          setData(extractNestedArrays(data)); // Extract and set only the arrays
+          setData(extractNestedArrays(data).reverse()); // Extract and set only the arrays
           console.log(data);
       }).catch((error) => {
           setFetchError("Failed to fetch data from server.");
